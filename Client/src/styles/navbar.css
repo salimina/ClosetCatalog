@@ -1,0 +1,36 @@
+.navbar {
+  width: 100%;
+  min-height: 70px;
+  padding: 0 32px;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  background-color: #222;
+  color: white;
+}
+
+.navbar-title {
+  margin: 0;
+}
+
+.navbar-links {
+  display: flex;
+  gap: 24px;
+}
+
+.nav-link {
+  padding: 23px 4px;
+  color: white;
+  text-decoration: none;
+}
+
+.nav-link:hover {
+  color: #525153;
+}
+
+.nav-link.active {
+  color: #525153;
+  border-bottom: 3px solid #525153;
+}

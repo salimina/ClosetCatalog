@@ -1,0 +1,35 @@
+.clothing-image-container {
+  position: relative;
+}
+
+.card-delete-button {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+
+  padding: 8px 12px;
+
+  border: none;
+  border-radius: 8px;
+
+  background-color: #c62828;
+  color: white;
+
+  font-weight: 600;
+  cursor: pointer;
+
+  box-shadow: 0 3px 10px rgb(0 0 0 / 25%);
+}
+
+.card-delete-button:hover {
+  background-color: #a91f1f;
+}
+
+.card-delete-button:disabled {
+  cursor: not-allowed;
+  opacity: 0.7;
+}
+
+.item-card-error {
+  color: #b00020;
+}

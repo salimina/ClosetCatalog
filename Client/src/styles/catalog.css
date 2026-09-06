@@ -1,0 +1,146 @@
+.catalog-layout {
+  display: flex;
+  min-height: calc(100vh - 70px);
+}
+
+.catalog-content {
+  flex: 1;
+  padding: 32px;
+}
+
+.catalog-content h1 {
+  margin-top: 0;
+}
+
+.catalog-count {
+  color: #666;
+}
+
+.clothing-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 24px;
+  margin-top: 24px;
+}
+
+.clothing-card {
+  overflow: hidden;
+  background-color: white;
+  border: 1px solid #ddd;
+  border-radius: 12px;
+}
+
+.clothing-image,
+.image-placeholder {
+  width: 100%;
+  height: 260px;
+}
+
+.clothing-image {
+  display: block;
+  object-fit: cover;
+}
+
+.image-placeholder {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  background-color: #eee;
+  color: #777;
+}
+
+.clothing-info {
+  padding: 16px;
+}
+
+.clothing-info h2 {
+  margin: 0 0 8px;
+  font-size: 18px;
+}
+
+.clothing-info p {
+  margin: 4px 0;
+}
+
+.error-message {
+  color: #b00020;
+}
+
+.floating-add-button {
+  position: fixed;
+  right: 32px;
+  bottom: 32px;
+  z-index: 50;
+
+  width: 64px;
+  height: 64px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border: none;
+  border-radius: 50%;
+
+  background-color: #222;
+  color: white;
+
+  font-size: 38px;
+  font-weight: 300;
+  line-height: 1;
+
+  cursor: pointer;
+
+  box-shadow: 0 6px 20px rgb(0 0 0 / 25%);
+
+  transition:
+    transform 0.2s,
+    background-color 0.2s;
+}
+
+.floating-add-button:hover {
+  background-color: #7c7b7d;
+  transform: scale(1.08);
+}
+
+.floating-add-button:active {
+  transform: scale(0.96);
+}
+
+.catalog-heading {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 24px;
+}
+
+.catalog-heading h1 {
+  margin: 0;
+}
+
+.catalog-edit-button,
+.catalog-save-button {
+  min-width: 90px;
+  padding: 10px 20px;
+
+  border: none;
+  border-radius: 8px;
+
+  color: white;
+  font: inherit;
+  cursor: pointer;
+}
+
+.catalog-edit-button {
+  background-color: #222;
+}
+
+.catalog-save-button {
+  background-color: #6d42a8;
+}
+
+.edit-mode-message {
+  margin: 8px 0 0;
+  color: #666;
+}

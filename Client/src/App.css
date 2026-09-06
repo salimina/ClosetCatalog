@@ -1,0 +1,43 @@
+* {
+   box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+}
+
+.topbar {
+  width: 100%;
+  height: 70px;
+  padding: 0 32px;
+  background-color: #222;
+  color: white;
+
+   display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.navLinks {
+  display: flex;
+  gap: 24px;
+}
+
+.navLinks a {
+  color: white;
+  text-decoration: none;
+}
+
+.navLinks a:hover {
+  color: #c9a7ff;
+}
+
+.navLinks a.active {
+  color: #c9a7ff;
+  border-bottom: 2px solid #c9a7ff;
+}
+
+.page {
+  padding: 32px;
+}

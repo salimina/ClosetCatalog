@@ -1,0 +1,24 @@
+# Dependencies
+node_modules/
+
+# Environment variables and secrets
+.env
+.env.*
+
+# Local database
+*.db
+*.db-journal
+
+# User-uploaded photos
+Server/uploads/
+server/uploads/
+
+# Frontend build
+dist/
+
+# macOS
+.DS_Store
+
+# Logs
+*.log
+npm-debug.log*

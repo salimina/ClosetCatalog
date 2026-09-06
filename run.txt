@@ -1,0 +1,2 @@
+FE: npm run dev
+BE: npm run dev
