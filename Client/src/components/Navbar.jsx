@@ -2,39 +2,35 @@ import { NavLink } from "react-router-dom";
 import "../styles/navbar.css";
 
 function Navbar() {
-  return (
-    <nav className="navbar">
-      <h2 className="navbar-title">Closet Catalog</h2>
+  function getLinkClass({ isActive }) {
+    return isActive ? "nav-link active" : "nav-link";
+  }
 
-      <div className="navbar-links">
-        <NavLink
-          to="/"
-          className={({ isActive }) =>
-            isActive ? "nav-link active" : "nav-link"
-          }
-        >
+  return (
+    <header className="navbar">
+      <div className="navbar-brand">
+        <p className="navbar-subtitle">
+          <span>Digital</span>
+          <span>Wardrobe</span>
+        </p>
+
+        <h1 className="navbar-title">Cataloged</h1>
+      </div>
+
+      <nav className="navbar-links" aria-label="Main navigation">
+        <NavLink to="/" className={getLinkClass}>
           My Closet
         </NavLink>
 
-        <NavLink
-          to="/wishlist"
-          className={({ isActive }) =>
-            isActive ? "nav-link active" : "nav-link"
-          }
-        >
+        <NavLink to="/wishlist" className={getLinkClass}>
           Wishlist
         </NavLink>
 
-        <NavLink
-          to="/swipe"
-          className={({ isActive }) =>
-            isActive ? "nav-link active" : "nav-link"
-          }
-        >
+        <NavLink to="/swipe" className={getLinkClass}>
           Swipe
         </NavLink>
-      </div>
-    </nav>
+      </nav>
+    </header>
   );
 }
 

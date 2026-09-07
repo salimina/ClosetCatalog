@@ -233,6 +233,164 @@ app.use((error, req, res, next) => {
   });
 });
 
+app.get("/api/wishlist", (req, res) => {
+  const items = db
+    .prepare(`
+      SELECT *
+      FROM wishlist_items
+      ORDER BY created_at DESC, id DESC
+    `)
+    .all();
+
+  res.json(items);
+});
+
+app.post("/api/wishlist", (req, res) => {
+  const {
+    name,
+    link,
+    brand = "",
+    price = "",
+    category = "",
+    note = "",
+    status = "want",
+  } = req.body;
+
+  if (!name?.trim()) {
+    return res.status(400).json({
+      error: "Piece name is required",
+    });
+  }
+
+  if (!link?.trim()) {
+    return res.status(400).json({
+      error: "Product link is required",
+    });
+  }
+
+  /*
+    Make sure the link is a valid http or https URL.
+  */
+  try {
+    const parsedLink = new URL(link);
+
+    if (!["http:", "https:"].includes(parsedLink.protocol)) {
+      throw new Error();
+    }
+  } catch {
+    return res.status(400).json({
+      error: "Please enter a valid product link",
+    });
+  }
+
+  const allowedStatuses = ["need", "want", "maybe"];
+
+  if (!allowedStatuses.includes(status)) {
+    return res.status(400).json({
+      error: "Status must be need, want, or maybe",
+    });
+  }
+
+  let priceCents = null;
+
+  if (price !== "") {
+    const numericPrice = Number(price);
+
+    if (!Number.isFinite(numericPrice) || numericPrice < 0) {
+      return res.status(400).json({
+        error: "Price must be a positive number",
+      });
+    }
+
+    priceCents = Math.round(numericPrice * 100);
+  }
+
+  const result = db
+    .prepare(`
+      INSERT INTO wishlist_items (
+        name,
+        link,
+        brand,
+        price_cents,
+        category,
+        note,
+        status
+      )
+      VALUES (?, ?, ?, ?, ?, ?, ?)
+    `)
+    .run(
+      name.trim(),
+      link.trim(),
+      brand.trim(),
+      priceCents,
+      category.trim(),
+      note.trim(),
+      status,
+    );
+
+  const newItem = db
+    .prepare(`
+      SELECT *
+      FROM wishlist_items
+      WHERE id = ?
+    `)
+    .get(result.lastInsertRowid);
+
+  res.status(201).json(newItem);
+});
+
+app.patch("/api/wishlist/:id/status", (req, res) => {
+  const { status } = req.body;
+  const allowedStatuses = ["need", "want", "maybe"];
+
+  if (!allowedStatuses.includes(status)) {
+    return res.status(400).json({
+      error: "Status must be need, want, or maybe",
+    });
+  }
+
+  const result = db
+    .prepare(`
+      UPDATE wishlist_items
+      SET status = ?
+      WHERE id = ?
+    `)
+    .run(status, req.params.id);
+
+  if (result.changes === 0) {
+    return res.status(404).json({
+      error: "Wishlist item not found",
+    });
+  }
+
+  const updatedItem = db
+    .prepare(`
+      SELECT *
+      FROM wishlist_items
+      WHERE id = ?
+    `)
+    .get(req.params.id);
+
+  res.json(updatedItem);
+});
+
+app.delete("/api/wishlist/:id", (req, res) => {
+  const result = db
+    .prepare(`
+      DELETE FROM wishlist_items
+      WHERE id = ?
+    `)
+    .run(req.params.id);
+
+  if (result.changes === 0) {
+    return res.status(404).json({
+      error: "Wishlist item not found",
+    });
+  }
+
+  res.status(204).send();
+});
+
 app.listen(PORT, () => {
   console.log(`Server running at http://localhost:${PORT}`);
 });

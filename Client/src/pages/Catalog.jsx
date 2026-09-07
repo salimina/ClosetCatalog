@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import FilterSidebar from "../components/FilterSidebar";
 import AddItemModal from "../components/AddItemModal";
 import ItemCard from "../components/ItemCard";
@@ -12,6 +12,27 @@ function Catalog() {
   const [error, setError] = useState("");
   const [isAddModalOpen, setIsAddModalOpen] = useState(false);
   const [isEditMode, setIsEditMode] = useState(false);
+
+  const categoryCounts = useMemo(() => {
+    const counts = {
+      all: items.length,
+      tops: 0,
+      bottoms: 0,
+      dresses: 0,
+      shoes: 0,
+      outerwear: 0,
+    };
+
+    items.forEach((item) => {
+      const category = item.category?.toLowerCase();
+
+      if (category in counts && category !== "all") {
+        counts[category] += 1;
+      }
+    });
+
+    return counts;
+  }, [items]);
 
   useEffect(() => {
     async function loadItems() {
@@ -42,14 +63,6 @@ function Catalog() {
           (item) => item.category.toLowerCase() === selectedCategory,
         );
 
-  function handleItemUpdated(updatedItem) {
-    setItems((currentItems) =>
-      currentItems.map((item) =>
-        item.id === updatedItem.id ? updatedItem : item,
-      ),
-    );
-  }
-
   function handleItemDeleted(deletedItemId) {
     setItems((currentItems) =>
       currentItems.filter((item) => item.id !== deletedItemId),
@@ -61,6 +74,7 @@ function Catalog() {
       <FilterSidebar
         selectedCategory={selectedCategory}
         onSelectCategory={setSelectedCategory}
+        categoryCounts={categoryCounts}
       />
 
       <section className="catalog-content">

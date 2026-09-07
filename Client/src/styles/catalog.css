@@ -1,6 +1,8 @@
 .catalog-layout {
+  min-height: calc(100vh - 150px);
+
+  background-color: white;
   display: flex;
-  min-height: calc(100vh - 70px);
 }
 
 .catalog-content {
@@ -18,50 +20,19 @@
 
 .clothing-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+
+  grid-template-columns: repeat(
+    auto-fill,
+    minmax(250px, 320px)
+  );
+
+  justify-content: start;
+  align-items: start;
+
   gap: 24px;
   margin-top: 24px;
 }
 
-.clothing-card {
-  overflow: hidden;
-  background-color: white;
-  border: 1px solid #ddd;
-  border-radius: 12px;
-}
-
-.clothing-image,
-.image-placeholder {
-  width: 100%;
-  height: 260px;
-}
-
-.clothing-image {
-  display: block;
-  object-fit: cover;
-}
-
-.image-placeholder {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
-  background-color: #eee;
-  color: #777;
-}
-
-.clothing-info {
-  padding: 16px;
-}
-
-.clothing-info h2 {
-  margin: 0 0 8px;
-  font-size: 18px;
-}
-
-.clothing-info p {
-  margin: 4px 0;
-}
 
 .error-message {
   color: #b00020;
@@ -100,7 +71,7 @@
 }
 
 .floating-add-button:hover {
-  background-color: #7c7b7d;
+  background-color: rgb(234, 228, 233);
   transform: scale(1.08);
 }
 
@@ -137,10 +108,16 @@
 }
 
 .catalog-save-button {
-  background-color: #6d42a8;
+  background-color: rgb(234, 228, 233);
 }
 
 .edit-mode-message {
   margin: 8px 0 0;
   color: #666;
+}
+
+.catalog-content {
+  flex: 1;
+  min-width: 0;
+  padding: 32px;
 }

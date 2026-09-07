@@ -1,36 +1,137 @@
 .navbar {
+  position: relative;
   width: 100%;
-  min-height: 70px;
+  min-height: 140px;
   padding: 0 32px;
 
   display: flex;
   align-items: center;
   justify-content: space-between;
 
-  background-color: #222;
+  background-color: #292830;
+  background-image:
+    linear-gradient(
+      rgba(199, 195, 215, 0.55),
+      rgba(199, 195, 215, 0.55)
+    ),
+    url("/images/dots.jpg");
+
+  background-size: cover;
+  background-position: center 55%;
+  background-repeat: no-repeat;
+
   color: white;
+  overflow: hidden;
+}
+
+/* Small vertical writing like the left side of the reference */
+.navbar-side-label {
+  margin: 0;
+
+  justify-self: start;
+
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 2px;
+  writing-mode: vertical-rl;
+  transform: rotate(180deg);
+}
+
+.navbar-brand {
+  display: flex;
+  align-items: center;
+  gap: 28px;
 }
 
 .navbar-title {
   margin: 0;
+  font-size: clamp(52px, 6vw, 82px);
+  line-height: 0.9;
+  font-weight: 400;
 }
 
-.navbar-links {
+.navbar-subtitle {
+  margin: 0;
+
   display: flex;
-  gap: 24px;
+  flex-direction: column;
+
+  font-size: 12px;
+  line-height: 1.15;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+}
+
+/* Buttons on the right */
+.navbar-links {
+  justify-self: end;
+
+  display: flex;
+  align-items: center;
+  gap: 0px;
 }
 
 .nav-link {
-  padding: 23px 4px;
-  color: white;
+  min-width: 90px;
+  padding: 12px 16px;
+
+  border: 1px solid rgb(44 43 50 / 35%);
+  border-radius: 0px;
+
+  background-color: rgb(255 255 255 / 55%);
+  color: #2c2b32;
+
+  font-size: 14px;
+  text-align: center;
   text-decoration: none;
+
+  transition:
+    background-color 0.2s,
+    color 0.2s,
+    transform 0.2s;
 }
 
 .nav-link:hover {
-  color: #525153;
+  background-color: #2c2b32;
+  color: #c7c3d7;
+  transform: translateY(-2px);
 }
 
 .nav-link.active {
-  color: #525153;
-  border-bottom: 3px solid #525153;
+  background-color: #2c2b32;
+  color: white;
+  border-color: #2c2b32;
+}
+
+/* Mobile layout */
+@media (max-width: 800px) {
+  .navbar {
+    grid-template-columns: 1fr;
+    justify-items: center;
+
+    padding: 20px;
+  }
+
+  .navbar-side-label {
+    display: none;
+  }
+
+  .navbar-title,
+  .navbar-links {
+    justify-self: center;
+  }
+
+  .navbar-title {
+    font-size: 64px;
+  }
+
+  .navbar-links {
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .nav-link {
+    min-width: auto;
+    padding: 9px 13px;
+  }
 }

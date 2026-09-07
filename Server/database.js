@@ -15,4 +15,22 @@ db.exec(`
   )
 `);
 
+db.exec(`
+  CREATE TABLE IF NOT EXISTS wishlist_items (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+
+    name TEXT NOT NULL,
+    link TEXT NOT NULL,
+    brand TEXT,
+    price_cents INTEGER,
+    category TEXT,
+    note TEXT,
+
+    status TEXT NOT NULL DEFAULT 'want'
+      CHECK (status IN ('need', 'want', 'maybe')),
+
+    created_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP
+  )
+`);
+
 export default db;

@@ -1,2 +1,6 @@
 FE: npm run dev
 BE: npm run dev
+
+
+purple:   background-color: rgb(234, 228, 233);
+black: 2c2b32
