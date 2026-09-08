@@ -1,24 +1,25 @@
 const SERVER_URL = "http://localhost:5000";
 
-function SwipeCard({ item }) {
+function SwipeCard({ title, item }) {
   return (
     <article className="swipe-card">
-      {item.image_url ? (
+      {title !== "Empty" ? (
         <img
-          className="clothing-image"
+          className={
+            title === "Bottoms" ? "swipe-card-bottom-image" : (title === "Shoes" ? "swipe-card-shoe-image" : "swipe-card-image")
+          }
           src={`${SERVER_URL}${item.image_url}`}
           alt={item.name}
         />
       ) : (
-        <div className="image-placeholder">No photo</div>
+        <div className="swipe-card">
+          <img
+            className="swipe-card-image"
+            src={`${item.image_url}`}
+            alt={`${title} placeholder`}
+          />
+        </div>
       )}
-
-      <div className="swipe-card-details">
-        <h3>{item.name}</h3>
-
-        {item.brand && <p>{item.brand}</p>}
-        {item.size && <span className="swipe-card-size">{item.size}</span>}
-      </div>
     </article>
   );
 }

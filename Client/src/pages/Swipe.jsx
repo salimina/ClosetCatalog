@@ -4,6 +4,12 @@ import "../styles/swipe.css";
 
 const SERVER_URL = "http://localhost:5000";
 
+const categories = [
+  { title: "Tops", value: "tops" },
+  { title: "Bottoms", value: "bottoms" },
+  { title: "Shoes", value: "shoes" },
+];
+
 function Swipe() {
   const [items, setItems] = useState([]);
   const [error, setError] = useState("");
@@ -46,17 +52,19 @@ function Swipe() {
 
   return (
     <main className="swipe-page">
-      <div className="swipe-heading">
+      <header className="swipe-heading">
         <h1>Build an Outfit</h1>
         <p>Swipe through your closet to create an outfit.</p>
-      </div>
+      </header>
 
       <div className="carousel-stack">
-        <Carousel title="Tops" items={getItemsByCategory("tops")} />
-
-        <Carousel title="Bottoms" items={getItemsByCategory("bottoms")} />
-
-        <Carousel title="Shoes" items={getItemsByCategory("shoes")} />
+        {categories.map((category) => (
+          <Carousel
+            key={category.value}
+            title={category.title}
+            items={getItemsByCategory(category.value)}
+          />
+        ))}
       </div>
     </main>
   );

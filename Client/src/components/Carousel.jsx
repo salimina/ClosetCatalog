@@ -1,18 +1,11 @@
 import { useEffect, useState } from "react";
 import SwipeCard from "./SwipeCard";
 
-const placeholderImages = {
-  tops: "/images/top.png",
-  bottoms: "/images/bottoms.png",
-  shoes: "/images/shoes.png",
-};
-
 function Carousel({ title, items }) {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [touchStart, setTouchStart] = useState(null);
 
   const category = title.toLowerCase();
-  const placeholderImage = placeholderImages[category];
 
   useEffect(() => {
     setCurrentIndex(0);
@@ -76,14 +69,19 @@ function Carousel({ title, items }) {
 
         <div className="carousel-window">
           {items.length === 0 ? (
-            <div className="carousel-placeholder">
-              {placeholderImage && (
-                <img
-                  className="placeholder-image"
-                  src={placeholderImage}
-                  alt={`${title} placeholder`}
-                />
-              )}
+            <div
+              className="carousel-track"
+              style={{
+                transform: `translateX(-${currentIndex * 100}%)`,
+              }}
+            >
+              <SwipeCard
+                title={"Empty"}
+                item={{
+                  name: `No ${category} found`,
+                  image_url: `/images/${title.toLowerCase()}.png`,
+                }}
+              />
             </div>
           ) : (
             <div
@@ -93,7 +91,7 @@ function Carousel({ title, items }) {
               }}
             >
               {items.map((item) => (
-                <SwipeCard key={item.id} item={item} />
+                <SwipeCard key={item.id} title={title} item={item} />
               ))}
             </div>
           )}
