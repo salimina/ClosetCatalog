@@ -1,0 +1,138 @@
+.swipe-page {
+  min-height: 100vh;
+  padding: 40px 24px 80px;
+}
+
+.swipe-heading {
+  margin-bottom: 40px;
+  text-align: center;
+}
+
+.swipe-heading h1 {
+  margin-bottom: 8px;
+}
+
+.carousel-stack {
+  display: flex;
+  flex-direction: column;
+  gap: 48px;
+}
+
+.carousel-section {
+  text-align: center;
+}
+
+.carousel-title {
+  margin: 0 0 18px;
+  font-size: 1.6rem;
+}
+
+.carousel {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 18px;
+  margin: 0 auto;
+}
+
+.carousel-window {
+  width: 300px;
+  overflow: hidden;
+  border-radius: 16px;
+  touch-action: pan-y;
+}
+
+.carousel-track {
+  display: flex;
+  transition: transform 0.4s ease;
+}
+
+.swipe-card {
+  position: relative;
+  flex: 0 0 100%;
+  overflow: hidden;
+  background: white;
+  border-radius: 16px;
+  box-shadow: 0 6px 20px rgb(0 0 0 / 15%);
+}
+
+.swipe-card-image {
+  display: block;
+  width: 100%;
+  height: 400px;
+  object-fit: cover;
+}
+
+.swipe-card-details {
+  padding: 14px 16px;
+}
+
+.swipe-card-details h3,
+.swipe-card-details p {
+  margin: 0;
+}
+
+.swipe-card-details p {
+  margin-top: 5px;
+  color: #666;
+}
+
+.swipe-card-size {
+  display: inline-block;
+  margin-top: 8px;
+  padding: 4px 10px;
+  border-radius: 12px;
+  background: #c7c3d7;
+}
+
+.carousel-button {
+  width: 44px;
+  height: 44px;
+  flex-shrink: 0;
+  border: none;
+  border-radius: 50%;
+  background: #222;
+  color: white;
+  font-size: 32px;
+  cursor: pointer;
+}
+
+.carousel-button:hover {
+  background: #525153;
+}
+
+.carousel-position {
+  margin: 12px 0 0;
+  color: #666;
+}
+
+.empty-carousel {
+  color: #777;
+  font-style: italic;
+}
+
+.swipe-message,
+.swipe-error {
+  margin-top: 50px;
+  text-align: center;
+}
+
+.swipe-error {
+  color: red;
+}
+
+@media (max-width: 480px) {
+  .carousel {
+    gap: 8px;
+  }
+
+  .carousel-window {
+    width: min(72vw, 300px);
+  }
+
+  .carousel-button {
+    width: 36px;
+    height: 36px;
+    font-size: 26px;
+  }
+}
